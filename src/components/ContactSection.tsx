@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { submitContactAction } from "@/app/actions/contact";
 
 const INITIAL = { success: false };
@@ -29,7 +29,26 @@ const inputStyle: React.CSSProperties = {
 
 export default function ContactSection() {
   const [state, formAction, isPending] = useActionState(submitContactAction, INITIAL);
+  const [contactMethod, setContactMethod] = useState<'email' | 'phone'>('email');
   const ref = useRef<HTMLElement>(null);
+  const lastFormData = useRef<Record<string, string>>({});
+
+  useEffect(() => {
+    if (!state.success) return;
+    const d = lastFormData.current;
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: 'e53f4f6f-ea08-4ac6-83df-a8c7d744e9d7',
+        subject: `Novo contato: ${d.name}`,
+        name: d.name,
+        contact: d.contact,
+        budget: d.budget || 'Não informado',
+        message: d.message,
+      }),
+    }).catch(console.error);
+  }, [state.success]);
 
   useEffect(() => {
     const section = ref.current;
@@ -81,7 +100,7 @@ export default function ContactSection() {
               Tem um projeto em mente? Me manda uma mensagem — respondo em até 24 horas.
             </p>
 
-            {/* Contact info */}
+           {/* Contact info 
             <div className="mt-10 space-y-4">
               <a
                 href="mailto:luizguilhermemodler2907@gmail.com"
@@ -93,8 +112,8 @@ export default function ContactSection() {
                 <span style={{ color: "var(--cyan)" }}>@</span>
                 luizguilhermemodler2907@gmail.com
               </a>
-            </div>
-          </div>
+            </div>*/}
+          </div> 
 
           {/* ── Right — form ── */}
           <div className="reveal" style={{ transitionDelay: "150ms" }}>
@@ -112,7 +131,19 @@ export default function ContactSection() {
                 </p>
               </div>
             ) : (
-              <form action={formAction} className="space-y-4">
+              <form
+                action={formAction}
+                onSubmit={(e) => {
+                  const fd = new FormData(e.currentTarget);
+                  lastFormData.current = {
+                    name: fd.get('name') as string,
+                    contact: fd.get('contact') as string,
+                    budget: fd.get('budget') as string,
+                    message: fd.get('message') as string,
+                  };
+                }}
+                className="space-y-4"
+              >
                 {/* Nome */}
                 <div>
                   <label className="block font-mono text-xs uppercase tracking-wider mb-2" style={{ color: "var(--text-muted)" }}>
@@ -134,23 +165,45 @@ export default function ContactSection() {
                   )}
                 </div>
 
-                {/* Email */}
+                {/* Contact toggle */}
                 <div>
                   <label className="block font-mono text-xs uppercase tracking-wider mb-2" style={{ color: "var(--text-muted)" }}>
-                    E-mail
+                    Contato
                   </label>
+                  <div className="flex gap-2 mb-2">
+                    {(['email', 'phone'] as const).map((method) => (
+                      <button
+                        key={method}
+                        type="button"
+                        onClick={() => setContactMethod(method)}
+                        style={{
+                          padding: "8px 16px",
+                          border: `1px solid ${contactMethod === method ? "var(--cyan)" : "var(--border)"}`,
+                          borderRadius: "4px",
+                          fontFamily: "monospace",
+                          fontSize: "12px",
+                          color: contactMethod === method ? "var(--cyan)" : "var(--text-muted)",
+                          background: "transparent",
+                          cursor: "pointer",
+                          transition: "border-color 0.2s ease, color 0.2s ease",
+                        }}
+                      >
+                        {method === 'email' ? 'Email' : 'Celular'}
+                      </button>
+                    ))}
+                  </div>
                   <input
-                    name="email"
-                    type="email"
-                    placeholder="seu@email.com"
+                    name="contact"
+                    type={contactMethod === 'email' ? 'email' : 'tel'}
+                    placeholder={contactMethod === 'email' ? 'seu@email.com' : '(51) 99999-9999'}
                     required
                     style={inputStyle}
                     onFocus={focusIn}
                     onBlur={focusOut}
                   />
-                  {state.errors?.email && (
+                  {state.errors?.contact && (
                     <p className="mt-1 font-mono text-xs" style={{ color: "var(--magenta)" }}>
-                      {state.errors.email[0]}
+                      {state.errors.contact[0]}
                     </p>
                   )}
                 </div>

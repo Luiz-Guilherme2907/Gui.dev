@@ -1,8 +1,8 @@
 const STACK = [
   "React", "Next.js", "TypeScript", "Node.js",
-  "Tailwind CSS", "PostgreSQL", "Supabase", "Prisma",
+  "Tailwind CSS", "PostgreSQL", "Prisma",
   "Docker", "Git", "Figma", "REST APIs",
-  "React Native", "Zod", "tRPC", "Vercel",
+  "React Native", "Java", "Springboot", "Angular", "Claude code", "Claude cowork", "I.A"
 ];
 
 // Duplicate for seamless loop

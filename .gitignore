@@ -37,6 +37,11 @@ pnpm-debug.log*
 .pnpm-debug.log*
 
 # =========================
+# Claude Code (local)
+# =========================
+.claude/
+
+# =========================
 # Sistema Operacional e Editores
 # =========================
 .DS_Store

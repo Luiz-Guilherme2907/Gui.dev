@@ -50,7 +50,7 @@ export default function HeroSection() {
             animate="visible"
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-8 md:mb-12"
           >
-            <Circle className="h-2 w-2 fill-rose-500/80" />
+            <Circle className="h-2 w-2 fill-emerald-500/80" />
             <span className="text-sm text-white/60 tracking-wide font-mono">
               Disponível para projetos
             </span>
@@ -74,7 +74,7 @@ export default function HeroSection() {
             <p className="text-base sm:text-lg md:text-xl text-white/40 mb-10 leading-relaxed font-light tracking-wide max-w-xl mx-auto">
               Transformo ideias em{" "}
               <span className="text-white/70">experiências digitais</span>{" "}
-              que geram resultados reais. React, Next.js, Node.js e muito mais.
+              que geram resultados reais.
             </p>
           </motion.div>
 

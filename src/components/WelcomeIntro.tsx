@@ -54,9 +54,7 @@ export default function WelcomeIntro() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.4, duration: 0.8 }}
               className="mt-6 font-mono text-xs text-white/30 tracking-widest uppercase"
-            >
-              clique para entrar
-            </motion.p>
+            >            </motion.p>
           </div>
         </motion.div>
       )}

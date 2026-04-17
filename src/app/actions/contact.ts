@@ -9,7 +9,7 @@ export async function submitContactAction(
 ): Promise<ContactFormState> {
   return insertContactRequest({
     name: formData.get('name'),
-    email: formData.get('email'),
+    contact: formData.get('contact'),
     message: formData.get('message'),
     budget: formData.get('budget'),
   })

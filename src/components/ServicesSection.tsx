@@ -7,37 +7,37 @@ const SERVICES = [
     n: "01", icon: "◈",
     title: "Landing Pages",
     desc: "Sites institucionais e landing pages que convertem visitantes em clientes com design que impressiona.",
-    tags: ["Next.js", "React", "SEO"],
+    tags: ["Alta conversão", "Rápido", "SEO"],
   },
   {
     n: "02", icon: "◇",
     title: "E-commerce",
     desc: "Lojas online com experiência de compra premium, integração de pagamentos e gestão de produtos.",
-    tags: ["Custom", "Stripe", "CMS"],
+    tags: ["Pagamento online", "Catálogo", "Gestão"],
   },
   {
     n: "03", icon: "⬡",
     title: "Sistemas Web",
     desc: "Dashboards, plataformas SaaS e sistemas internos sob medida para automatizar seu negócio.",
-    tags: ["React", "Node.js", "SQL"],
+    tags: ["Automatização", "Dashboard", "Escalável"],
   },
   {
     n: "04", icon: "◎",
     title: "Apps Mobile",
     desc: "Aplicações responsivas e PWAs que funcionam perfeitamente em qualquer dispositivo e plataforma.",
-    tags: ["React Native", "PWA"],
+    tags: ["Android & iOS", "Offline", "Leve"],
   },
   {
     n: "05", icon: "⬙",
     title: "APIs & Backend",
     desc: "Integrações, microsserviços e arquiteturas escaláveis que sustentam sua aplicação com segurança.",
-    tags: ["Node.js", "TypeScript", "REST"],
+    tags: ["Integrações", "Seguro", "Escalável"],
   },
   {
     n: "06", icon: "◬",
     title: "UI/UX Design",
     desc: "Interfaces elegantes e funcionais pensadas na experiência real do usuário do início ao fim.",
-    tags: ["Figma", "Tailwind", "A11y"],
+    tags: ["Design moderno", "Responsivo", "Intuitivo"],
   },
 ];
 

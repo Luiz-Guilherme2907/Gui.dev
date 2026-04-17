@@ -2,11 +2,10 @@
 
 import { useEffect, useRef } from "react";
 
-const SKILLS = [
-  "React", "Next.js", "TypeScript", "Node.js",
-  "PostgreSQL", "Supabase", "Tailwind CSS", "Prisma",
-  "Docker", "Git & GitHub", "Figma", "REST / tRPC",
-  "React Native", "Zod", "Vercel / AWS",
+const AREAS = [
+  { tag: "Frontend", desc: "Interfaces rápidas, acessíveis e responsivas" },
+  { tag: "Backend",  desc: "APIs robustas, autenticação e banco de dados" },
+  { tag: "Mobile",   desc: "Apps responsivos e dinâmicos" },
 ];
 
 const REASONS = [
@@ -89,35 +88,22 @@ export default function AboutSection() {
 
           {/* ── Right — skills ── */}
           <div>
-            <div className="reveal" style={{ transitionDelay: "150ms" }}>
+            <div className="reveal space-y-3" style={{ transitionDelay: "150ms" }}>
               <p className="font-mono text-xs uppercase tracking-widest mb-6" style={{ color: "var(--text-muted)" }}>
-                Tecnologias que uso
+                Áreas de atuação
               </p>
-              <div className="flex flex-wrap gap-2.5">
-                {SKILLS.map((s) => (
-                  <span
-                    key={s}
-                    className="font-mono text-xs px-3 py-1.5 rounded-sm transition-all duration-200 cursor-default hover:border-cyan"
-                    style={{
-                      border:     "1px solid var(--border)",
-                      color:      "var(--text-dim)",
-                      background: "var(--bg-1)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = "var(--cyan)";
-                      e.currentTarget.style.color       = "var(--cyan)";
-                      e.currentTarget.style.background  = "var(--cyan-dim)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = "var(--border)";
-                      e.currentTarget.style.color       = "var(--text-dim)";
-                      e.currentTarget.style.background  = "var(--bg-1)";
-                    }}
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
+              {AREAS.map((a) => (
+                <div
+                  key={a.tag}
+                  className="px-4 py-3 rounded-sm transition-all duration-200 cursor-default group"
+                  style={{ border: "1px solid var(--border)", background: "var(--bg-1)" }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--cyan)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; }}
+                >
+                  <p className="font-mono text-xs mb-1" style={{ color: "var(--cyan)" }}>// {a.tag}</p>
+                  <p className="text-sm" style={{ color: "var(--text-dim)" }}>{a.desc}</p>
+                </div>
+              ))}
             </div>
 
             {/* Terminal-style block */}

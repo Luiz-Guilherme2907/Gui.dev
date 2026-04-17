@@ -4,7 +4,7 @@ import { createSupabaseServerClient } from '@/lib/supabase/server'
 
 const ContactSchema = z.object({
   name: z.string().min(2, 'Nome muito curto.').max(100).trim(),
-  email: z.string().email('E-mail inválido.').max(255).toLowerCase().trim(),
+  contact: z.string().min(5, 'Contato muito curto.').max(255).trim(),
   message: z.string().min(10, 'Mensagem muito curta.').max(2000).trim(),
   budget: z.string().optional(),
 })
@@ -21,20 +21,19 @@ export async function insertContactRequest(
   const parsed = ContactSchema.safeParse(rawData)
 
   if (!parsed.success) {
-    return { errors: parsed.error.flatten().fieldErrors }
+    return { errors: parsed.error.flatten((i) => i.message).fieldErrors }
   }
 
   const supabase = createSupabaseServerClient()
 
   const { error } = await supabase.from('contact_requests').insert({
     name: parsed.data.name,
-    email: parsed.data.email,
+    contact: parsed.data.contact,
     message: parsed.data.message,
     budget: parsed.data.budget ?? null,
   })
 
   if (error) {
-    // Regista o erro no servidor mas nunca expõe detalhes da BD ao cliente
     console.error('[contact DAL] insert error:', error.message)
     return { message: 'Erro interno. Por favor, tenta novamente mais tarde.' }
   }
